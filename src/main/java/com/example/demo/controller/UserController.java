@@ -17,7 +17,7 @@ public class UserController {
         return us.register(user);
     }
     @PostMapping("/login")
-    public Optional<User> find(@RequestBodu String email)
+    public Optional<User> find(@RequestBody String email)
     {
         return us.findbyemail(email);
     }   
