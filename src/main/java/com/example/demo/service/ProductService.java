@@ -4,6 +4,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.Product;
 @Service
 public interface ProductService {
-    Product  addProduct(Product pe);
+    Product  addProduct(Product product);
     List<Product> getAllProducts();   
 }

@@ -12,7 +12,7 @@ public class Product {
     private Long id;
     private String name;
     private String brand;
-    private String modelnumber;
+    private String modelNumber;
     private String category;
     public Long getid() {
         return id;
@@ -32,11 +32,11 @@ public class Product {
     public void setBrand(String brand) {
         this.brand = brand;
     }
-    public String getModelnumber() {
-        return modelnumber;
+    public String getModelNumber() {
+        return modelNumber;
     }
-    public void setModelnumber(String modelnumber) {
-        this.modelnumber = modelnumber;
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
     }
     public String getCategory() {
         return category;
@@ -44,11 +44,11 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
-    public Product(Long id, String name, String brand, String modelnumber, String category) {
+    public Product(Long id, String name, String brand, String modelNumber, String category) {
         this.id = id;
         this.name = name;
         this.brand = brand;
-        this.modelnumber = modelnumber;
+        this.modelNumber = modelNumber;
         this.category = category;
     }
     public Product() {

@@ -9,7 +9,7 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     ProductRepository pr;
     @Override
-    public Product  addProduct(Product pe)
+    public Product  addProduct(Product product)
     {
         return pr.save(pe);
     }
