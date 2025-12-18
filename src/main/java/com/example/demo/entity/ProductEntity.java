@@ -9,16 +9,16 @@ import jakarta.persistence.Entity;
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private Long fields;
+    private Long id;
     private String name;
     private String brand;
     private String modelnumber;
     private String category;
-    public Long getFields() {
-        return fields;
+    public Long getid() {
+        return id;
     }
-    public void setFields(Long fields) {
-        this.fields = fields;
+    public void setid(Long id) {
+        this.id = id;
     }
     public String getName() {
         return name;
@@ -44,8 +44,8 @@ public class ProductEntity {
     public void setCategory(String category) {
         this.category = category;
     }
-    public ProductEntity(Long fields, String name, String brand, String modelnumber, String category) {
-        this.fields = fields;
+    public ProductEntity(Long id, String name, String brand, String modelnumber, String category) {
+        this.id = id;
         this.name = name;
         this.brand = brand;
         this.modelnumber = modelnumber;
