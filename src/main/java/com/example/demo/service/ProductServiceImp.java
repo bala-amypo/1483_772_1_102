@@ -11,7 +11,7 @@ public class ProductServiceImp implements ProductService {
     @Override
     public Product  addProduct(Product product)
     {
-        return pr.save(pe);
+        return pr.save(product);
     }
     public List<Product> getAllProducts()
     {
