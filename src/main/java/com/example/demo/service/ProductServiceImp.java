@@ -9,11 +9,11 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     ProductRepository pr;
     @Override
-    public ProductEntity  addproduct(ProductEntity pe)
+    public ProductEntity  addProduct(ProductEntity pe)
     {
         return pr.save(pe);
     }
-    public List<ProductEntity> getall()
+    public List<ProductEntity> getAllProducts()
     {
         return pr.findAll();
     }  

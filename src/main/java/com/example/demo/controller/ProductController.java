@@ -11,15 +11,15 @@ import com.example.demo.service.ProductService;
 public class ProductController {
     @Autowired
     ProductService ps;
-    @PostMapping("/addproduct")
+    @PostMapping("/add a product")
     public ProductEntity add(@RequestBody ProductEntity pe)
     {
-        return ps.addproduct(pe);
+        return ps.addProduct(pe);
         
     }
-    @GetMapping("/show")
+    @GetMapping("/list all products")
     public List<ProductEntity>get()
     {
-        return ps.getall();
+        return ps.getAllProducts();
     }
 }
