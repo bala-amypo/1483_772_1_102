@@ -14,10 +14,8 @@ public class Product {
     private String name;
     private String brand;
     @NotBlank(message = "Model number required")
-    @NotNull(message = "Model number required")
     private String modelNumber;
     @NotBlank(message = "Category required")
-    @NotNull(message = "Category required")
     private String category;
     public Long getproductid() {
         return productid;
