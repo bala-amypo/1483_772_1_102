@@ -2,23 +2,28 @@ package com.example.demo.entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.Entity;
-
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private Long id;
+    private Long productid;
     private String name;
     private String brand;
+    @NotBlank(message = "Model number required")
+    @NotNull(message = "Model number required")
     private String modelNumber;
+    @NotBlank(message = "Category required")
+    @NotNull(message = "Category required")
     private String category;
-    public Long getid() {
-        return id;
+    public Long getproductid() {
+        return productid;
     }
-    public void setid(Long id) {
-        this.id = id;
+    public void setproductid(Long productid) {
+        this.productid = productid;
     }
     public String getName() {
         return name;
@@ -44,8 +49,8 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
-    public Product(Long id, String name, String brand, String modelNumber, String category) {
-        this.id = id;
+    public Product(Long productid, String name, String brand, String modelNumber, String category) {
+        this.productid = productid;
         this.name = name;
         this.brand = brand;
         this.modelNumber = modelNumber;
