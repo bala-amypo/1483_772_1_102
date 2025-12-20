@@ -1,20 +1,37 @@
 package com.example.demo.service;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
-public class ProductServiceImp implements ProductService {
+public class ProductServiceImpl
+        implements ProductService {
+
     @Autowired
-    ProductRepository pr;
+    private ProductRepository productRepository;
+
     @Override
-    public Product  addProduct(Product product)
-    {
-        return pr.save(product);
+    public Product addProduct(Product product) {
+
+        if (product.getModelNumber() == null ||
+                product.getModelNumber().trim().isEmpty()) {
+            throw new IllegalArgumentException("Model number required");
+        }
+
+        if (product.getCategory() == null ||
+                product.getCategory().trim().isEmpty()) {
+            throw new IllegalArgumentException("Category required");
+        }
+
+        return productRepository.save(product);
     }
-    public List<Product> getAllProducts()
-    {
-        return pr.findAll();
-    }  
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 }

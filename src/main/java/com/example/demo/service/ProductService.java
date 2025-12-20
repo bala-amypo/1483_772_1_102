@@ -1,9 +1,12 @@
 package com.example.demo.service;
-import java.util.List;
-import org.springframework.stereotype.Service;
+
 import com.example.demo.entity.Product;
-@Service
+
+import java.util.List;
+
 public interface ProductService {
-    Product  addProduct(Product product);
-    List<Product> getAllProducts();   
+
+    Product addProduct(Product product);
+
+    List<Product> getAllProducts();
 }
