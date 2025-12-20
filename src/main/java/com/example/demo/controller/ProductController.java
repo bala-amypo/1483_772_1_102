@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @PostMapping
+    @PostMapping("/add a product")
     public ResponseEntity<Product> addProduct(
             @RequestBody Product product
     ) {
@@ -24,7 +24,7 @@ public class ProductController {
         );
     }
 
-    @GetMapping
+    @GetMapping("/list all products")
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok(
                 productService.getAllProducts()
