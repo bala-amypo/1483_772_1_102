@@ -25,10 +25,10 @@ public class UserServiceImpl
         if (user.getRole() == null) {
             user.setRole("USER");
         }
+        user.setPassword(user.getPassword());
 
-        user.setPassword(
-                passwordEncoder.encode(user.getPassword())
-        );
+
+
 
         return userRepository.save(user);
     }
