@@ -3,6 +3,7 @@ package com.example.demo.security;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,12 +42,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String role = claims.get("role", String.class);
 
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(
-                                email,
-                                null,
-                                Collections.singleton(() ->
-                                        "ROLE_" + role)
-                        );
+        new UsernamePasswordAuthenticationToken(
+                email,
+                null,
+                Collections.singleton(
+                        new SimpleGrantedAuthority("ROLE_" + role)
+                )
+        );
+
 
                 authentication.setDetails(
                         new WebAuthenticationDetailsSource()
