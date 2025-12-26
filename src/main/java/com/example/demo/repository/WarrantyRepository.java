@@ -13,6 +13,10 @@ public interface WarrantyRepository
 
     List<Warranty> findByUserId(Long userId);
 
- List<Warranty> findByExpiryDateBetween(LocalDate start, LocalDate end);
+List<Warranty> findWarrantiesExpiringBetween(
+    LocalDate start,
+    LocalDate end
+);
+
 
 }

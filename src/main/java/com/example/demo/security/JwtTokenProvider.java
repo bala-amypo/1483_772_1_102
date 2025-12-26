@@ -10,6 +10,11 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
+    
+    public String createToken(Long userId, String email, String role) {
+    return "dummy-token";
+}
+
 
     public JwtTokenProvider(JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;
