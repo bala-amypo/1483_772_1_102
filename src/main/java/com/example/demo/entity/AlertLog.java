@@ -10,7 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 @Table(name = "alert_logs")
 public class AlertLog {
 
@@ -26,5 +25,8 @@ public class AlertLog {
 
     private String message;
 
-    
+    @PrePersist
+    public void prePersist() {
+        this.sentAt = LocalDateTime.now();
+    }
 }
