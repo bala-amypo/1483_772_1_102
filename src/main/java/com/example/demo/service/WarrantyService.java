@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface WarrantyService {
-    Warranty save(Warranty warranty);
+    Warranty registerWarranty(Long userId, Long productId, Warranty warranty);
+    Warranty getWarranty(Long warrantyId);
+    List<Warranty> getUserWarranties(Long userId);
     List<Warranty> findExpiringBetween(LocalDate start, LocalDate end);
 }
