@@ -1,5 +1,5 @@
 package com.example.demo.service.impl;
-
+package com.example.demo.service.UserService;
 
 import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;

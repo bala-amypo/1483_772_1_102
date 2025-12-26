@@ -1,4 +1,5 @@
 package com.example.demo.service.impl;
+package com.example.demo.service.ProductService;
 
 
 import com.example.demo.entity.Product;

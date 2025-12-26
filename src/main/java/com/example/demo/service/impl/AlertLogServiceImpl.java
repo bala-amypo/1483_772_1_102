@@ -1,5 +1,5 @@
 package com.example.demo.service.impl;
-
+package com.example.demo.service.AlertLogService;
 
 import com.example.demo.entity.AlertLog;
 import com.example.demo.entity.Warranty;
