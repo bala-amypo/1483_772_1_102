@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
-package com.example.demo.service.WarrantyService;
+
+import com.example.demo.service.WarrantyService;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.User;
 import com.example.demo.entity.Warranty;
