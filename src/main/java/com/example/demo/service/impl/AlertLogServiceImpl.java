@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
-package com.example.demo.service.AlertLogService;
 
+import
 import com.example.demo.entity.AlertLog;
 import com.example.demo.entity.Warranty;
 import com.example.demo.exception.ResourceNotFoundException;
