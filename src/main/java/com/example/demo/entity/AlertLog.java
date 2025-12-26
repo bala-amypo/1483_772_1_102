@@ -11,7 +11,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 
-@Entity
 @Table(name = "alert_logs")
 public class AlertLog {
 

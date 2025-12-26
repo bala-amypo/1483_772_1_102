@@ -1,11 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.AlertSchedule;
-import java.util.List;
+import com.example.demo.entity.Warranty;
 
 public interface AlertScheduleService {
-
-    AlertSchedule createSchedule(Long warrantyId, AlertSchedule schedule);
-
-    List<AlertSchedule> getSchedules(Long warrantyId);
+    AlertSchedule create(Warranty warranty, int daysBeforeExpiry);
 }

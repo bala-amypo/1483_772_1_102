@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 
-@Entity
+
 @Table(name = "alert_schedules")
 public class AlertSchedule {
 
