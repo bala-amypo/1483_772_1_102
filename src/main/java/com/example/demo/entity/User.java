@@ -1,8 +1,9 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.util.List;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -10,8 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-
 @Table(
         name = "users",
         uniqueConstraints = {
@@ -37,5 +36,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Warranty> warranties;
 
-    
+    // 🔥 REQUIRED FOR TEST CASES
+    public User(Long id, String name, String email, String password, String role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 }
