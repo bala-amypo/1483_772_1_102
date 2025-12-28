@@ -4,14 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-
-@Table(name = "alert_schedules")
 public class AlertSchedule {
 
     @Id
@@ -19,12 +15,8 @@ public class AlertSchedule {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "warranty_id", nullable = false)
     private Warranty warranty;
 
     private Integer daysBeforeExpiry;
-
     private Boolean enabled;
-
-    
 }
