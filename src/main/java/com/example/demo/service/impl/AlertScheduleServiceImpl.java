@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.AlertSchedule;
 import com.example.demo.entity.Warranty;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.AlertScheduleRepository;
 import com.example.demo.repository.WarrantyRepository;
 import com.example.demo.service.AlertScheduleService;
@@ -12,14 +13,12 @@ import java.util.List;
 @Service
 public class AlertScheduleServiceImpl implements AlertScheduleService {
 
-    private final AlertScheduleRepository scheduleRepository;
+    private final AlertScheduleRepository alertScheduleRepository;
     private final WarrantyRepository warrantyRepository;
 
-    public AlertScheduleServiceImpl(
-            AlertScheduleRepository scheduleRepository,
-            WarrantyRepository warrantyRepository
-    ) {
-        this.scheduleRepository = scheduleRepository;
+    public AlertScheduleServiceImpl(AlertScheduleRepository alertScheduleRepository,
+                                    WarrantyRepository warrantyRepository) {
+        this.alertScheduleRepository = alertScheduleRepository;
         this.warrantyRepository = warrantyRepository;
     }
 
@@ -27,31 +26,20 @@ public class AlertScheduleServiceImpl implements AlertScheduleService {
     public AlertSchedule createSchedule(Long warrantyId, AlertSchedule schedule) {
 
         Warranty warranty = warrantyRepository.findById(warrantyId)
-                .orElseThrow(() ->
-                        new RuntimeException("Warranty not found")
-                );
+                .orElseThrow(() -> new ResourceNotFoundException("Warranty not found"));
 
-        if (schedule.getDaysBeforeExpiry() == null ||
-            schedule.getDaysBeforeExpiry() < 0) {
-
-            throw new IllegalArgumentException(
-                    "daysBeforeExpiry must be >= 0"
-            );
+        if (schedule.getDaysBeforeExpiry() < 0) {
+            throw new IllegalArgumentException("daysBeforeExpiry must be >= 0");
         }
 
         schedule.setWarranty(warranty);
-
-        return scheduleRepository.save(schedule);
+        return alertScheduleRepository.save(schedule);
     }
 
     @Override
     public List<AlertSchedule> getSchedules(Long warrantyId) {
-
         warrantyRepository.findById(warrantyId)
-                .orElseThrow(() ->
-                        new RuntimeException("Warranty not found")
-                );
-
-        return scheduleRepository.findByWarrantyId(warrantyId);
+                .orElseThrow(() -> new ResourceNotFoundException("Warranty not found"));
+        return alertScheduleRepository.findByWarrantyId(warrantyId);
     }
 }
