@@ -2,32 +2,27 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
+@RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService service;
 
-    @PostMapping("/add a product")
-    public ResponseEntity<Product> addProduct(
-            @RequestBody Product product
-    ) {
-        return ResponseEntity.ok(
-                productService.addProduct(product)
-        );
+    public ProductController(ProductService service) {
+        this.service = service;
     }
 
-    @GetMapping("/list all products")
-    public ResponseEntity<List<Product>> getAllProducts() {
-        return ResponseEntity.ok(
-                productService.getAllProducts()
-        );
+    @PostMapping
+    public Product add(@RequestBody Product product) {
+        return service.addProduct(product);
+    }
+
+    @GetMapping
+    public List<Product> list() {
+        return service.getAllProducts();
     }
 }

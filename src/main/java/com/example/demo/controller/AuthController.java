@@ -6,8 +6,7 @@ import com.example.demo.dto.RegisterRequest;
 import com.example.demo.entity.User;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,18 +14,21 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder encoder;
+    private final JwtTokenProvider tokenProvider;
 
-    public AuthController(UserService userService,
-                          JwtTokenProvider jwtTokenProvider) {
+    public AuthController(
+            UserService userService,
+            PasswordEncoder encoder,
+            JwtTokenProvider tokenProvider
+    ) {
         this.userService = userService;
-        this.jwtTokenProvider = jwtTokenProvider;
+        this.encoder = encoder;
+        this.tokenProvider = tokenProvider;
     }
 
-    // ================= REGISTER =================
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody RegisterRequest req) {
+    public User register(@RequestBody RegisterRequest req) {
 
         User user = new User();
         user.setName(req.getName());
@@ -34,35 +36,29 @@ public class AuthController {
         user.setPassword(req.getPassword());
         user.setRole(req.getRole());
 
-        return ResponseEntity.ok(userService.register(user));
+        return userService.register(user);
     }
 
-    // ================= LOGIN =================
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest req) {
+    public AuthResponse login(@RequestBody AuthRequest req) {
 
         User user = userService.findByEmail(req.getEmail());
 
-        boolean passwordMatch =
-                encoder.matches(req.getPassword(), user.getPassword());
-
-        if (!passwordMatch) {
-            throw new IllegalArgumentException("Invalid credentials");
+        if (!encoder.matches(req.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtTokenProvider.createToken(
+        String token = tokenProvider.createToken(
                 user.getId(),
                 user.getEmail(),
                 user.getRole()
         );
 
-        return ResponseEntity.ok(
-                new AuthResponse(
-                        token,
-                        user.getId(),
-                        user.getEmail(),
-                        user.getRole()
-                )
+        return new AuthResponse(
+                token,
+                user.getId(),
+                user.getEmail(),
+                user.getRole()
         );
     }
 }
