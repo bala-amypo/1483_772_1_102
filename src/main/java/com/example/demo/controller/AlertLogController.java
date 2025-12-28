@@ -2,34 +2,30 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.AlertLog;
 import com.example.demo.service.AlertLogService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/logs")
 public class AlertLogController {
 
-    @Autowired
-    private AlertLogService alertLogService;
+    private final AlertLogService service;
+
+    public AlertLogController(AlertLogService service) {
+        this.service = service;
+    }
 
     @PostMapping("/{warrantyId}")
-    public ResponseEntity<AlertLog> addLog(
+    public AlertLog add(
             @PathVariable Long warrantyId,
-            @RequestBody String message
+            @RequestParam String message
     ) {
-        return ResponseEntity.ok(
-                alertLogService.addLog(warrantyId, message)
-        );
+        return service.addLog(warrantyId, message);
     }
 
     @GetMapping("/{warrantyId}")
-    public ResponseEntity<List<AlertLog>> getLogs(
-            @PathVariable Long warrantyId
-    ) {
-        return ResponseEntity.ok(
-                alertLogService.getLogs(warrantyId)
-        );
+    public List<AlertLog> list(@PathVariable Long warrantyId) {
+        return service.getLogs(warrantyId);
     }
 }
