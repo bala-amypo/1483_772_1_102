@@ -25,7 +25,7 @@ public class SwaggerConfig {
                         .title("Digital Warranty Tracker API")
                         .version("1.0"))
                 // 🔴 IMPORTANT: define backend server
-                .addServersItem(new Server().url("http://localhost:8080"))
+                .addServersItem(new Server().url("https://9007.pro604cr.amypo.ai/"))
                 .components(new io.swagger.v3.oas.models.Components()
                         .addSecuritySchemes("Authorization", securityScheme))
                 // 🔴 Apply JWT only when needed (Swagger UI button)
