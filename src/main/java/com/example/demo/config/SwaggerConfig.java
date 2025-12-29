@@ -4,6 +4,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,7 +14,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
 
-        SecurityScheme scheme = new SecurityScheme()
+        SecurityScheme securityScheme = new SecurityScheme()
                 .name("Authorization")
                 .type(SecurityScheme.Type.HTTP)
                 .scheme("bearer")
@@ -23,8 +24,11 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("Digital Warranty Tracker API")
                         .version("1.0"))
-                .addSecurityItem(new SecurityRequirement().addList("Authorization"))
+                // 🔴 IMPORTANT: define backend server
+                .addServersItem(new Server().url("http://localhost:8080"))
                 .components(new io.swagger.v3.oas.models.Components()
-                        .addSecuritySchemes("Authorization", scheme));
+                        .addSecuritySchemes("Authorization", securityScheme))
+                // 🔴 Apply JWT only when needed (Swagger UI button)
+                .addSecurityItem(new SecurityRequirement().addList("Authorization"));
     }
 }
