@@ -30,11 +30,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Warranty> warranties;
 
-    // REQUIRED by JPA
     public User() {
     }
 
-    // REQUIRED by tests (constructor usage)
     public User(Long id,
                 String name,
                 String email,
@@ -48,7 +46,6 @@ public class User {
         this.role = role;
     }
 
-    // Full constructor
     public User(Long id,
                 String name,
                 String email,
